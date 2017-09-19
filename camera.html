@@ -1,0 +1,55 @@
+<!doctype html>
+<head lang="en">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+  
+  <title>Camera</title>
+</head>
+<body>
+  <div class="container tabbar">
+    <ul class="nav nav-tabs">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Controls</a></li>
+      <li class="active"><a href="#">Cameras</a></li>
+    </ul>
+  </div>
+  <div class="fluid-container">
+    <div id="device-list" class="dropdown">
+      <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Choose Device ...&nbsp;<span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li><a href="#" data-value="gd1">Front Garage Door 1 --- <span style="color: blue">OPEN</span></a></li>
+        <li><a href="#" data-value="gd2">Front Garage Door 2 --- <span style="color: black">CLOSED</span></a></li>
+        <li class="divider"></li>
+        <li><a href="#" data-value="add-device">Add</a></li>
+        <li><a href="#" data-value="delete-device">Delete</a></li>
+      </ul>
+    </div>
+    <br>
+    <div id="control-board" class="row">
+      <div class="col-sm-4">
+        <h3>Device Name</h3>
+        <h4>Status: 
+          <span style="color: blue">OPEN</span>
+        </h4>
+        <h4>
+          Current Temperature is <span style="color: red">26°C</span>
+        </h4>
+        <button class="btn btn-primary btn-block" style="max-width: 300px">CLOSE</button>
+        <button class="btn btn-primary btn-block" style="max-width: 300px">PLAY/PAUSE</button>
+      </div>
+      <div id="advanced-controls" class="col-sm-8">
+        <iframe width="854" height="480" src="https://www.youtube.com/embed/ZOpWO7rJbtU?autoplay=1" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
