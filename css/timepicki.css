@@ -2,6 +2,7 @@
 /* 
 Created on: 17 Sep, 2014, 4:29:37 PM
 Author: senthil
+Time picker CSS
 */
 
 .ti_tx,
@@ -75,14 +76,15 @@ Author: senthil
 	height: 10px;
 	z-index: 999;
 }
+
 input.timepicki-input {
 	background: none repeat scroll 0 0 #FFFFFF;
-    	border: 1px solid #CCCCCC;
-    	border-radius: 5px 5px 5px 5px;
-    	float: none;
-    	margin: 0;
-    	text-align: center;
-    	width: 70%;
+	border: 1px solid #CCCCCC;
+	border-radius: 5px 5px 5px 5px;
+	float: none;
+	margin: 0;
+	text-align: center;
+	width: 70%;
 }
 a.reset_time {
 	float: left;

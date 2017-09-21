@@ -11,14 +11,34 @@
 
   <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
   
+  <style>
+  /* CSS for the embed video */
+  .embed-container { 
+    position: relative; 
+    padding-bottom: 56.25%; 
+    height: 0; 
+    overflow: hidden; 
+    max-width: 100%; 
+  } 
+
+  .embed-container iframe, .embed-container object, .embed-container embed { 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+  }
+  </style>
+
   <title>Camera</title>
 </head>
 <body>
+  <!--Top Navigation Bar-->
   <div class="container tabbar">
     <ul class="nav nav-tabs">
       <li><a href="#">Home</a></li>
-      <li><a href="#">Controls</a></li>
-      <li class="active"><a href="#">Cameras</a></li>
+      <li><a href="controls.html">Controls</a></li>
+      <li class="active"><a href="camera.html">Cameras</a></li>
     </ul>
   </div>
   <div class="fluid-container">
@@ -35,10 +55,11 @@
     </div>
     <br>
     <div id="control-board" class="row">
+      <!--Left Menu Panel-->
       <div class="col-sm-4">
         <h3>Device Name</h3>
         <h4>Status: 
-          <span style="color: blue">OPEN</span>
+          <span style="color: red">CLOSED</span>
         </h4>
         <h4>
           Current Temperature is <span style="color: red">26°C</span>
@@ -46,8 +67,11 @@
         <button class="btn btn-primary btn-block" style="max-width: 300px">CLOSE</button>
         <button class="btn btn-primary btn-block" style="max-width: 300px">PLAY/PAUSE</button>
       </div>
+      <!--Right Portion-->
       <div id="advanced-controls" class="col-sm-8">
-        <iframe width="854" height="480" src="https://www.youtube.com/embed/ZOpWO7rJbtU?autoplay=1" allowfullscreen></iframe>
+        <div class='embed-container'>
+          <iframe src='https://www.youtube.com/embed/ZOpWO7rJbtU?autoplay=1' allowfullscreen></iframe>
+        </div>
       </div>
     </div>
   </div>
