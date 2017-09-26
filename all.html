@@ -1,0 +1,506 @@
+<!doctype html>
+<head lang="en">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" media="screen and (min-device-width: 800px)" type="text/css" href="css/stylesheet.css">
+	<link rel="stylesheet" media="screen and (max-device-width: 800px)" type="text/css" href="css/stylesheet_mobile.css">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<title>Login</title>
+</head>
+<body>
+	<!--Login Page Starts Here-->
+	<div id="login-page">
+		<!--Navigation Bar-->
+		<div class="container tabbar">
+			<p class="nav-bar-title">Smart Garage</p>
+		</div>
+		<br>
+		<!--Log in Inputs-->
+		<div class="container">
+			<h2 class="titleline">Log In</h2>
+			<br>
+			<div id="login-box">
+				<div class="row">
+					<div class="centered">
+						<div class="login-box">
+							<input class="login-input" type="text" placeholder="Enter Username" name="uname" required>
+						</div>
+						
+						<div class="login-box">
+							<input class="login-input" type="password" placeholder="Enter Password" name="psw" required>
+						</div>
+						
+						<br>
+						<div><input type="checkbox" checked="checked"> Remember me</div>
+						<br>
+						<button type="button" class="bottom-buttons" id="login-page-login-button">Login</button>
+
+					</div>
+				</div>
+				<br>
+				<div class="centered bottom-bar">
+					<div class="centered">
+						<span class="psw"><button type="button" class="bottom-buttons" id="login-page-forgot-pwd-button">Forgot password?</button> | <button type="button" class="bottom-buttons" id="login-page-register-button">Register</button></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--Login Page Ends Here-->
+	<!--Password Recovery Page Starts Here-->
+	<div id="pwd-recovery-page" hidden>
+		<!--Navigation Bar-->
+		<div class="container tabbar">
+			<p class="nav-bar-title">Smart Garage</p>
+		</div>
+		<br>
+		<!--Login / Password Recovery Inputs-->
+		<div id="login-box">
+			<div class="container">
+				<h2 class="titleline">Password Recovery</h2>
+				<br>
+				<div class="row">
+					<div class="centered">
+						<div class="row">
+							<div class="login-box">
+								<input class="login-input" type="text" placeholder="Enter Username">
+							</div>
+						</div>
+						<div>
+							<span>---------- OR ----------</span>
+						</div>
+						<div class="row">
+							<div class="login-box">
+								<input class="login-input" type="email" placeholder="Enter Email">
+							</div>
+						</div>
+						<br>
+
+						<button type="button" class="bottom-buttons" id="pwd-recovery-page-recover-button">Recover</button>
+					</div>
+				</div>
+				<br>
+				<div class="container" style="background-color:#f1f1f1">
+					<div class="centered">
+						<span class="psw"><button type="button" class="bottom-buttons" id="pwd-recovery-page-cancel-button">Cancel</button> | <button type="button" class="bottom-buttons" id="pwd-recovery-page-register-button">Register</button></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--Password Recovery Page Ends Here-->
+	<!--Register Page Starts Here-->
+	<div id="register-page" hidden>
+		<!--Navigation Bar-->
+		<div class="container tabbar">
+			<p class="nav-bar-title">Smart Garage</p>
+		</div>
+		<br>
+		<!--Log in / Register Inputs-->
+		<div id="login-box">
+			<div class="container">
+				<h2 class="titleline">Sign Up</h2>
+				<br>
+				<div class="centered">
+					<div class="login-box">
+						<input class="login-input" type="text" placeholder="Enter Username" name="uname" required>
+					</div>
+				</div>
+				<div class="centered">
+					<div class="login-box">
+						<input class="login-input" type="password" placeholder="Enter Password" name="psw" required>
+					</div>
+				</div>
+				<div class="centered">
+					<div class="login-box">
+						<input class="login-input" type="password" placeholder="Repeat Password" name="psw-repeat" required>
+					</div>
+				</div>
+				<div class="centered">
+					<div class="login-box">
+						<input class="login-input" type="text" placeholder="Enter Phone Number" name="phone" required>
+					</div>
+				</div>
+				<div class="centered">
+					<div class="login-box">
+						<input class="login-input" type="text" placeholder="Enter Garage ID" name="garage" required>
+					</div>
+				</div>
+				<div class="centered"><input type="checkbox" checked="checked"> Remember me
+					<p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+				</div>
+				<div class="clearfix centered">
+					<button type="button"  class="bottom-buttons" id="register-page-cancel-button">Cancel</button>
+					<button type="button" class="bottom-buttons" id="register-page-signup-button">Sign Up</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--Register Page Ends Here-->
+
+	<!--Controls Page Starts Here-->
+	<div id="controls-page" hidden>
+		<!--Top Navigation Bar-->
+		<div class="container tabbar">
+			<span class="right-align">Smart Garage</span>
+			<ul class="nav nav-tabs">
+				<li class="active"><button type="button" class="navbar-button" id="controls-page-controls-button">Controls</button></li>
+				<li><button type="button" class="navbar-button" id="controls-page-cameras-button">Cameras</button></li>
+			</ul>
+		</div>
+		<div class="fluid-container">
+			<div id="device-list" class="dropdown">
+				<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Choose Device ...&nbsp;<span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu">
+					<li><a href="#" data-value="gd1">Front Garage Door 1 --- <span style="color: blue">OPEN</span></a></li>
+					<li><a href="#" data-value="gd2">Front Garage Door 2 --- <span style="color: black">CLOSED</span></a></li>
+					<li class="divider"></li>
+					<li><a href="#" data-value="add-device">Add</a></li>
+					<li><a href="#" data-value="delete-device">Delete</a></li>
+				</ul>
+			</div>
+			<br>
+			<!--Below Navigation Bar-->
+			<div id="control-board" class="row">
+				<div class="col-sm-4" id="controls-page-left-panel">
+					<h3>Device Name</h3>
+					<h4>Status: 
+						<span class="color-blue" id="controls-page-status-indicator">OPEN</span>
+					</h4>
+					<h4>
+						Current Temperature is <span class="color-blue" id="controls-page-temp-indicator">26°C</span>
+					</h4>
+					<button class="btn btn-primary btn-block" id="controls-page-close-button">CLOSE</button>
+					<button class="btn btn-primary btn-block" id="controls-page-see-camera-button">SEE SECURITY CAMERA</button>
+				</div>
+				<!--Right Portion-->
+				<div id="advanced-controls" class="col-sm-8">
+					<div class="panel-group">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" href="#collapse1">Auto Close</a>
+									<label class="switch">
+										<input type="checkbox" id="auto-close-slider">
+										<span class="slider"></span>
+									</label>
+								</h4>
+							</div>
+							<div id="collapse1" class="panel-collapse collapse in">
+								<div class="panel-body">
+									<div>
+										<div>
+											<div class="control-div" action="#">
+												<div class="time-div">
+													<p>Set the door to close after </p>
+													<input type="number" class="time-input" name="auto-hour" id="auto-close-hour-input">&nbsp;&nbsp;&nbsp;
+													<span>Hour(s)</span>
+													<input type="number" class="time-input" name="auto-minute" id="auto-close-minute-input">
+													<span>Minutes(s)</span>
+												</div>
+												<input type="button" class="btn btn-primary" id="controls-page-auto-button" value="Submit">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" href="#collapse2">
+										Notification Options
+									</a>
+								</h4>
+							</div>
+							<div id="collapse2" class="panel-collapse collapse">
+								<div class="panel-body">
+									<p>Text notifications will be sent when</p>
+									<div class="control-div" action="#">
+										<ul>
+											<li>
+												<div>
+													<input type="checkbox" value="">
+													Door opens
+												</div>
+												<div>
+													<input type="checkbox" value="">
+													Door closes
+												</div>
+												<div>
+													<input type="checkbox" value="">
+													Door left open for
+													<div>
+														<input type="number" class="time-input" name="open-hour">&nbsp;&nbsp;Hour(s)&nbsp;
+														<input type="number" class="time-input" name="open-minute">&nbsp;&nbsp;Minute(s)
+													</div>
+												</div>
+											</li>
+											<li>
+												<div>
+													<input type="checkbox" value="">
+													Garage temperature is higher than
+													<div>
+														<input type="number" placeholder="Celsius">
+													</div>
+												</div>
+												<div>
+													<input type="checkbox" value="">
+													Garage temperature is lower than
+													<div>
+														<input type="number" placeholder="Celsius">
+													</div>
+												</div>
+											</li>
+										</ul>
+										<input type="button" class="btn btn-primary" value="Update">
+									</div>
+
+								</div>
+							</div>
+						</div>
+
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" href="#collapse3">
+										Custom Feature
+									</a>
+								</h4>
+							</div>
+
+							<div id="collapse3" class="panel-collapse collapse">
+								<div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+									sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+									minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+									commodo consequat.
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--Controls Page Ends Here-->
+	<!--Camera Page Starts Here-->
+	<div id="camera-page" hidden>
+		<!--Top Navigation Bar-->
+		<div class="container tabbar">
+			<ul class="nav nav-tabs">
+				<li><button type="button" id="camera-page-home-button">Home</button></li>
+				<li class="active"><button type="button" id="camera-page-controls-button">Controls</button></li>
+				<li><button type="button" id="camera-page-cameras-button">Cameras</button></li>
+			</ul>
+		</div>
+		<div class="fluid-container">
+			<div id="device-list" class="dropdown">
+				<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Choose Device ...&nbsp;<span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu">
+					<li><a href="#" data-value="gd1">Front Garage Door 1 --- <span style="color: blue">OPEN</span></a></li>
+					<li><a href="#" data-value="gd2">Front Garage Door 2 --- <span style="color: black">CLOSED</span></a></li>
+					<li class="divider"></li>
+					<li><a href="#" data-value="add-device">Add</a></li>
+					<li><a href="#" data-value="delete-device">Delete</a></li>
+				</ul>
+			</div>
+			<br>
+			<div id="control-board" class="row">
+				<!--Left Menu Panel-->
+				<div class="col-sm-4">
+					<h3>Device Name</h3>
+					<h4>Status: 
+						<span style="color: red">CLOSED</span>
+					</h4>
+					<h4>
+						Current Temperature is <span style="color: red">26°C</span>
+					</h4>
+					<button class="btn btn-primary btn-block" style="max-width: 300px">CLOSE</button>
+					<button class="btn btn-primary btn-block" style="max-width: 300px">PLAY/PAUSE</button>
+				</div>
+				<!--Right Portion-->
+				<div id="advanced-controls" class="col-sm-8">
+					<div class='embed-container'>
+						<iframe src='https://www.youtube.com/embed/ZOpWO7rJbtU?autoplay=1' allowfullscreen></iframe>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--Camera Page Ends Here-->
+	<!--JavaScripts Code Here-->
+	<script type="text/javascript">
+		//doorStatus true for open, false for close
+		var doorStatus = true;
+		var currentTemp = 26;
+		var currentPage = "login-page";
+		var pages = ["login-page", "pwd-recovery-page", "register-page", "controls-page", "camera-page"];
+		function changeVisibility(pageToShow) {
+			document.getElementById(pageToShow).removeAttribute("hidden");
+			document.getElementById(currentPage).setAttribute("hidden", '');
+			currentPage = pageToShow;
+		}
+
+		//login page js
+		document.getElementById("login-page-login-button").addEventListener("click", function(){
+			var controlsButton = document.getElementById("controls-page-controls-button");
+			controlsButton.className = "navbar-button-selected";
+			controlsButton.disabled = true;
+			changeVisibility("controls-page");
+			startTempAnimation();
+		});
+
+		document.getElementById("login-page-forgot-pwd-button").addEventListener("click", function(){
+			changeVisibility("pwd-recovery-page");
+		});
+
+		document.getElementById("login-page-register-button").addEventListener("click", function(){
+			changeVisibility("register-page");
+		});
+
+		//pwd recovery page js
+		document.getElementById("pwd-recovery-page-recover-button").addEventListener("click", function(){
+			alert("This will be the password");
+			changeVisibility("login-page");
+		});
+
+		document.getElementById("pwd-recovery-page-cancel-button").addEventListener("click", function(){
+			changeVisibility("login-page");
+		});
+
+		document.getElementById("pwd-recovery-page-register-button").addEventListener("click", function(){
+			changeVisibility("register-page");
+		});
+
+		//register page js
+		document.getElementById("register-page-cancel-button").addEventListener("click", function(){
+			changeVisibility("login-page");
+		});
+
+		document.getElementById("register-page-signup-button").addEventListener("click", function(){
+			alert("Call Register Function!");
+			changeVisibility("login-page");
+		});
+
+		//controls page js
+		document.getElementById("controls-page-cameras-button").addEventListener("click", function(){
+			changeVisibility("camera-page");
+			stopTempAnimation();
+		});
+
+		document.getElementById("controls-page-close-button").addEventListener("click", function(){
+			var d = document.createElement("div");
+			d.className = "statusBarContainer";
+			d.id = "status-bar-container";
+			var m = document.createElement("div");
+			m.className = "statusBarMove";
+			m.id = "status-bar-move";
+			document.getElementById("controls-page-left-panel").appendChild(d);
+			document.getElementById("status-bar-container").appendChild(m);
+			animationDoor();
+		});
+
+		function animationDoor() {
+			var m = document.getElementById("status-bar-move");
+			var d = document.getElementById("status-bar-container");
+			var width = 0;
+			var i = setInterval(frame, 10);
+			function frame() {
+				if (width >= 100) {
+					clearInterval(i);
+					document.getElementById("status-bar-container").removeChild(m);
+					document.getElementById("controls-page-left-panel").removeChild(d);
+					var indicator = document.getElementById("controls-page-status-indicator");
+					var button = document.getElementById("controls-page-close-button");
+					if (doorStatus) {
+						indicator.className = "color-red";
+						indicator.innerHTML = "CLOSED";
+						button.innerHTML = "OPEN";
+					}
+					else {
+						indicator.className = "color-blue";
+						indicator.innerHTML = "OPEN";
+						button.innerHTML = "CLOSE";
+					}
+					doorStatus = !doorStatus;
+				} else {
+					width = width + 0.2;  
+					m.style.width = width + '%'; 
+				}
+			}
+		}
+
+		document.getElementById("controls-page-see-camera-button").addEventListener("click", function(){
+			changeVisibility("camera-page");
+			stopTempAnimation();
+		});
+
+		function changeTemp() {
+			var newTemp = Math.floor(Math.random()*30 + 10);
+			var tempIndicator = document.getElementById("controls-page-temp-indicator");
+			if (newTemp >= 30) {
+				tempIndicator.className = "color-red";
+			}
+			else {
+				tempIndicator.className = "color-blue";
+			}
+			tempIndicator.innerHTML = newTemp+"°C";
+			currentTemp = newTemp;
+		}
+
+		function startTempAnimation() {
+			setInterval(changeTemp, 3000);
+		}
+
+		function stopTempAnimation() {
+			clearInterval(changeTemp);
+		}
+
+		document.getElementById("controls-page-auto-button").addEventListener("click", function(){
+			var h = document.getElementById("auto-close-hour-input").value;
+			var m = document.getElementById("auto-close-minute-input").value;
+			if (h < 0 | h >= 12 | m < 0 | (h == "" && m == "")) {
+				alert("Error: Please input valid time to use the Auto Close feature. Hours should be less than 12. ");
+			}
+			else {
+				alert("Success! Garage Door will close after "+h+" hours and "+m+" minutes");
+			}
+			document.getElementById("auto-close-hour-input").value = "";
+			document.getElementById("auto-close-minute-input").value = "";
+		});
+
+		document.getElementById("auto-close-slider").addEventListener("change", function(){
+			var checkbox = document.getElementById("auto-close-slider");
+			if (checkbox.checked) {
+				alert("Auto Close feature is Enabled!");
+			}
+			else {
+				alert("Auto Close feature is Disabled!");
+			}
+		});
+
+		//camera page js
+		document.getElementById("camera-page-controls-button").addEventListener("click", function(){
+			changeVisibility("controls-page");
+			startTempAnimation();
+		});
+
+		document.getElementById("camera-page-cameras-button").addEventListener("click", function(){
+			changeVisibility("camera-page");
+		});
+
+
+		</script>
+	</body>
+	</html>
