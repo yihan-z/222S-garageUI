@@ -596,6 +596,8 @@ function animationDoor() {
 
 document.getElementById("controls-page-see-camera-button").addEventListener("click", function(){
 	changeVisibility("camera-page");
+	document.getElementById("cameras-button").className+="active";
+	document.getElementById("controls-button").className="";
 	stopTempAnimation();
 });
 
