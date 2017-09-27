@@ -16,6 +16,15 @@
 	<title>Smart Garage</title>
 </head>
 <body>
+	<!--Top Navigation Bar-->
+	<div class="container tabbar" id="nav-bar">
+		<span class="right-align">Smart Garage</span>
+		<ul class="nav nav-tabs">
+			<li data-toggle="tab" class="active" id="controls-button"><a href="#controls-page">Controls</a></li>
+			<li data-toggle="tab" id="cameras-button"><a href="#camera-page">Cameras</a></li>
+		</ul>
+	</div>
+
 	<!--Login Page Starts Here-->
 	<div id="login-page">
 		<!--Navigation Bar-->
@@ -146,16 +155,10 @@
 	</div>
 	<!--Register Page Ends Here-->
 
+<div class="tab-content">
 	<!--Controls Page Starts Here-->
 	<div id="controls-page" hidden>
-		<!--Top Navigation Bar-->
-		<div class="container tabbar">
-			<span class="right-align">Smart Garage</span>
-			<ul class="nav nav-tabs">
-				<li class="active"><button type="button" class="navbar-button" id="controls-page-controls-button">Controls</button></li>
-				<li><button type="button" class="navbar-button" id="controls-page-cameras-button">Cameras</button></li>
-			</ul>
-		</div>
+
 		<div class="fluid-container">
 			<div id="device-list" class="dropdown">
 				<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" id="control-dropdown-overview">Choose Device ...&nbsp;<span class="caret"></span>
@@ -190,7 +193,7 @@
 								<h4 class="panel-title">
 									<a data-toggle="collapse" href="#collapse1">Auto Close</a>
 									<label class="switch">
-										<input type="checkbox" id="auto-close-slider">
+										<input type="checkbox" onchange='setAutoCloseDisplay(this.checked);' id="auto-close-slider">
 										<span class="slider" value="off"></span>
 									</label>
 								</h4>
@@ -199,23 +202,20 @@
 								<div class="panel-body">
 									<div>
 										<div>
-											<div class="control-div" id="auto-close-div" action="#">
-												<div class="time-div">
-													<div class="checkbox">
-														<label>
-															<input type="checkbox" onchange='setAutoCloseDisplay(this.checked);' id="auto-close-switch"> Set Auto Close
-														</label>
-													</div>
-													<div id="auto-close-time-form">
-														<input type="number" class="time-input auto-time-input" name="auto-hour" id="auto-close-hour-input" min="0" max="24" value="0">
-														<span class="auto-time-text">Hour(s)&nbsp;&nbsp;</span>
-														<input type="number" class="time-input auto-time-input" name="auto-minute" id="auto-close-minute-input" min="1" max="59" value="1">
-														<span class="auto-time-text">Minutes(s)</span>
-													</div>
+											<div class="time-div">
+												<div id="auto-close-time-form">
+													<div id="curr-auto-close" class="curr-status">No auto-close setup</div>
+
+													<input type="number" class="time-input auto-time-input" name="auto-hour" id="auto-close-hour-input" min="0" max="12" value="0">
+													<span class="auto-time-text">Hour(s)&nbsp;&nbsp;</span>
+													<input type="number" class="time-input auto-time-input" name="auto-minute" id="auto-close-minute-input" min="0" max="59" value="0">
+													<span class="auto-time-text">Minutes(s)</span>
 												</div>
-												<input type="button" class="btn btn-primary" id="controls-page-auto-button" value="Submit">
+												<div id="auto-close-disabled" class="disabled-status">Auto Close is disabled</div>
 
 											</div>
+											<input type="button" class="btn btn-primary" id="controls-page-auto-button" value="Submit">
+
 										</div>
 									</div>
 								</div>
@@ -227,51 +227,60 @@
 									<a data-toggle="collapse" href="#collapse2">
 										Notification Options
 									</a>
+									<label class="switch">
+										<input type="checkbox" onchange='setNotifDisplay(this.checked);' id="notif-slider">
+										<span class="slider" value="off"></span>
+									</label>
 								</h4>
 							</div>
 							<div id="collapse2" class="panel-collapse collapse">
 								<div class="panel-body">
-									<p>Text notifications will be sent when</p>
-									<div class="control-div" action="#">
-										<ul>
-											<li>
-												<div>
-													<input type="checkbox" value="">
-													Door opens
-												</div>
-												<div>
-													<input type="checkbox" value="">
-													Door closes
-												</div>
-												<div>
-													<input type="checkbox" value="">
-													Door left open for
-													<div>
-														<input type="number" class="time-input" name="open-hour" min="0" max="24" value="0">&nbsp;&nbsp;Hour(s)&nbsp;
-														<input type="number" class="time-input" name="open-minute" min="1" max="59" value="1">&nbsp;&nbsp;Minute(s)
-													</div>
-												</div>
-											</li>
-											<li>
-												<div>
-													<input type="checkbox" value="">
-													Garage temperature is higher than
-													<div>
-														<input type="number" placeholder="Celsius">
-													</div>
-												</div>
-												<div>
-													<input type="checkbox" value="">
-													Garage temperature is lower than
-													<div>
-														<input type="number" placeholder="Celsius">
-													</div>
-												</div>
-											</li>
-										</ul>
-										<input type="button" class="btn btn-primary" value="Update">
-									</div>
+									<div class="time-div">
+										<div class="control-div" action="#"  id="notif-options">
+											<div id="curr-notif" class="curr-status">No notification is setup</div>
 
+											<!-- <p>Text notifications will be sent when</p> -->
+
+											<ul id="notif-list">
+												<li id="notif-time">
+													<div>
+														<input type="checkbox" id="notif-open" value="">
+														Door opens
+													</div>
+													<div>
+														<input type="checkbox" id="notif-close" value="">
+														Door closes
+													</div>
+													<div>
+														<input type="checkbox" id="notif-left-open" value="">
+														Door left open for
+														<div>
+															<input type="number" class="time-input" id="notif-open-hour" name="open-hour" min="0" max="12" value="0">&nbsp;&nbsp;Hour(s)&nbsp;
+															<input type="number" class="time-input" id="notif-open-minute" name="open-minute" min="0" max="59" value="0">&nbsp;&nbsp;Minute(s)
+														</div>
+													</div>
+												</li>
+												<li id="notif-temp">
+													<div>
+														<input type="checkbox" id="notif-temp-hi" value="">
+														Garage temperature is higher than
+														<div>
+															<input type="number" id="notif-temp-hi-val" placeholder="Celsius">
+														</div>
+													</div>
+													<div>
+														<input type="checkbox" id="notif-temp-lo" value="">
+														Garage temperature is lower than
+														<div>
+															<input type="number" id="notif-temp-lo-val" placeholder="Celsius">
+														</div>
+													</div>
+												</li>
+											</ul>
+											<input type="button" class="btn btn-primary" id="notif-submit-btn" value="Update">
+										</div>
+										<div id="notif-disabled" class="disabled-status">Notification is disabled</div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -302,21 +311,13 @@
 	<!--Controls Page Ends Here-->
 	<!--Camera Page Starts Here-->
 	<div id="camera-page" hidden>
-		<!--Top Navigation Bar-->
-		<div class="container tabbar">
-			<ul class="nav nav-tabs">
-				<li><button type="button" id="camera-page-home-button">Home</button></li>
-				<li class="active"><button type="button" id="camera-page-controls-button">Controls</button></li>
-				<li><button type="button" id="camera-page-cameras-button">Cameras</button></li>
-			</ul>
-		</div>
+
 		<div class="fluid-container">
 			<div id="device-list" class="dropdown">
-				<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Choose Device ...&nbsp;<span class="caret"></span>
+				<button class="btn btn-default dropdown-toggle" type="button" id="camera-control-dropdown-overview" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Choose Device ...&nbsp;<span class="caret"></span>
 				</button>
 				<ul class="dropdown-menu">
-					<li><a href="#" data-value="gd1">Front Garage Door 1 --- <span style="color: blue">OPEN</span></a></li>
-					<li><a href="#" data-value="gd2">Front Garage Door 2 --- <span style="color: black">CLOSED</span></a></li>
+					<li><a href="#" data-value="gd1" id="cameras-garage">Front Garage Door 1</span></a></li>
 					<li class="divider"></li>
 					<li><a href="#" data-value="add-device">Add</a></li>
 					<li><a href="#" data-value="delete-device">Delete</a></li>
@@ -326,14 +327,14 @@
 			<div id="control-board" class="row">
 				<!--Left Menu Panel-->
 				<div class="col-sm-4">
-					<h3>Device Name</h3>
+					<h3 id="camera-control-device-name">Device Name</h3>
 					<h4>Status: 
-						<span style="color: red">CLOSED</span>
+						<span style="color: red" id="cameras-page-status-indicator">CLOSED</span>
 					</h4>
 					<h4>
 						Current Temperature is <span style="color: red">26°C</span>
 					</h4>
-					<button class="btn btn-primary btn-block" style="max-width: 300px">CLOSE</button>
+					<button class="btn btn-primary btn-block" style="max-width: 300px" id="cameras-page-close-button">CLOSE</button>
 					<button class="btn btn-primary btn-block" style="max-width: 300px">PLAY/PAUSE</button>
 				</div>
 				<!--Right Portion-->
@@ -344,6 +345,7 @@
 				</div>
 			</div>
 		</div>
+	</div>
 	</div>
 	<!--Camera Page Ends Here-->
 	<!--JavaScripts Code Here-->
@@ -397,7 +399,6 @@
 		document.getElementById("login-page-login-button").addEventListener("click", function(){
 			var loginUname = document.getElementById("uname").value;
 			var loginPwd = document.getElementById("pwd").value;
-			console.log(loginUname + ", " + loginPwd);
 			document.getElementById("uname").value="";
 			document.getElementById("pwd").value="";
 			for (var i = 0; i < users.length; i++){
@@ -407,18 +408,18 @@
 					currUser = u;
 					if(document.getElementById("remember").checked){ // set remember me
 						remembered = u;
-						console.log("remembering: " + remembered);
 					} else {
 						remembered = null;
 					}
 
 					// Setting up control page entries
-					var controlsButton = document.getElementById("controls-page-controls-button");
-					controlsButton.className = "navbar-button-selected";
-					controlsButton.disabled = true;
+					document.getElementById("nav-bar").style.display="initial";
+
+					// var controlsButton = document.getElementById("controls-button");
+					// controlsButton.className = "active";
+					// controlsButton.disabled = true;
 					document.getElementById("control-device-name").innerText = currUser.garageId;
 					document.getElementById("control-dropdown-overview").innerHTML=currUser.garageId+'&nbsp;<span class="caret"></span>';
-					console.log(currUser.garageId);
 					var status = "";
 					if (currUser.doorOpen){
 						status = "OPEN";
@@ -433,17 +434,12 @@
 					document.getElementById("controls-page-status-indicator").innerText = status;
 
 					// autotime status
-					var autoClose = document.getElementById("auto-close-switch").checked;
-					// if(autoClose){
-					// 	console.log("auto close is on");
-					// 	document.getElementById("auto-close-time-form").style.display = "initial";
-					// 	document.getElementById("controls-page-auto-button").style.display = "initial";
-					// } else {
-					// 	console.log("auto close is off");
-					// 	document.getElementById("auto-close-time-form").style.display = "none";
-					// 	document.getElementById("controls-page-auto-button").style.display = "none";
-					// }
-					setAutoCloseDisplay(autoClose);
+					document.getElementById("auto-close-slider").checked = currUser.autoClose;
+					setAutoCloseDisplay(currUser.autoClose);
+
+					// notif status
+					document.getElementById("notif-slider").checked = currUser.notif;
+					setNotifDisplay(currUser.notif);
 
 					changeVisibility("controls-page");
 					startTempAnimation();
@@ -519,7 +515,6 @@ document.getElementById("login-page-register-button").addEventListener("click", 
 				users.push(newUser);
 
 				for (var i = 0; i < users.length; i++){
-					console.log(users[i].username);
 				}
 
 				changeVisibility("login-page");
@@ -528,127 +523,251 @@ document.getElementById("login-page-register-button").addEventListener("click", 
 		});
 
 		//controls page js
-		document.getElementById("controls-page-cameras-button").addEventListener("click", function(){
+		document.getElementById("cameras-button").addEventListener("click", function(){
 			changeVisibility("camera-page");
 			stopTempAnimation();
+			console.log("pulling up cameras page");
+			// set up camera page entries
+			// var cameraButton = document.getElementById("camera-page-cameras-button");
+			// cameraButton.className = "navbar-button-selected";
+			// cameraButton.disabled = true;
+
+			document.getElementById("camera-control-device-name").innerText = currUser.garageId;
+			document.getElementById("camera-control-dropdown-overview").innerHTML=currUser.garageId+'&nbsp;<span class="caret"></span>';
+			var status = "";
+			if (currUser.doorOpen){
+				status = "OPEN";
+				document.getElementById("cameras-page-status-indicator").className = "color-blue";
+				document.getElementById("cameras-page-close-button").innerText = "CLOSE";
+			} else {
+				status = "CLOSED";
+				document.getElementById("cameras-page-status-indicator").className = "color-red";
+				document.getElementById("cameras-page-close-button").innerText = "OPEN";
+			}
+			document.getElementById("cameras-garage").innerText = currUser.garageId;
+			document.getElementById("cameras-page-status-indicator").innerText = status;
+
 		});
 
-			// document.getElementById("auto-close-switch").addEventListener('change', setAutoCloseDisplay(document.getElementById("auto-close-switch").checked));
+document.getElementById("controls-page-close-button").addEventListener("click", function(){
+	currUser.doorOpen = !currUser.doorOpen;
 
-		document.getElementById("controls-page-close-button").addEventListener("click", function(){
-			currUser.doorOpen = !currUser.doorOpen;
+	var d = document.createElement("div");
+	d.className = "statusBarContainer";
+	d.id = "status-bar-container";
+	var m = document.createElement("div");
+	m.className = "statusBarMove";
+	m.id = "status-bar-move";
+	document.getElementById("controls-page-left-panel").appendChild(d);
+	document.getElementById("status-bar-container").appendChild(m);
+	animationDoor();
+});
 
-			var d = document.createElement("div");
-			d.className = "statusBarContainer";
-			d.id = "status-bar-container";
-			var m = document.createElement("div");
-			m.className = "statusBarMove";
-			m.id = "status-bar-move";
-			document.getElementById("controls-page-left-panel").appendChild(d);
-			document.getElementById("status-bar-container").appendChild(m);
-			animationDoor();
-		});
+function animationDoor() {
+	var doorStatus = currUser.doorOpen;
+	var m = document.getElementById("status-bar-move");
+	var d = document.getElementById("status-bar-container");
+	var width = 0;
+	var i = setInterval(frame, 10);
+	function frame() {
+		if (width >= 100) {
+			clearInterval(i);
+			document.getElementById("status-bar-container").removeChild(m);
+			document.getElementById("controls-page-left-panel").removeChild(d);
+			var indicator = document.getElementById("controls-page-status-indicator");
+			var button = document.getElementById("controls-page-close-button");
+			if (doorStatus) {
+				indicator.className = "color-red";
+				indicator.innerHTML = "CLOSED";
+				button.innerHTML = "OPEN";
+			}
+			else {
+				indicator.className = "color-blue";
+				indicator.innerHTML = "OPEN";
+				button.innerHTML = "CLOSE";
+			}
+			doorStatus = !doorStatus;
+		} else {
+			width = width + 0.2;  
+			m.style.width = width + '%'; 
+		}
+	}
+}
 
-		function animationDoor() {
-			var doorStatus = currUser.doorOpen;
-			var m = document.getElementById("status-bar-move");
-			var d = document.getElementById("status-bar-container");
-			var width = 0;
-			var i = setInterval(frame, 10);
-			function frame() {
-				if (width >= 100) {
-					clearInterval(i);
-					document.getElementById("status-bar-container").removeChild(m);
-					document.getElementById("controls-page-left-panel").removeChild(d);
-					var indicator = document.getElementById("controls-page-status-indicator");
-					var button = document.getElementById("controls-page-close-button");
-					if (doorStatus) {
-						indicator.className = "color-red";
-						indicator.innerHTML = "CLOSED";
-						button.innerHTML = "OPEN";
+document.getElementById("controls-page-see-camera-button").addEventListener("click", function(){
+	changeVisibility("camera-page");
+	stopTempAnimation();
+});
+
+function changeTemp() {
+	var newTemp = Math.floor(Math.random()*30 + 10);
+	var tempIndicator = document.getElementById("controls-page-temp-indicator");
+	if (newTemp >= 30) {
+		tempIndicator.className = "color-red";
+	}
+	else {
+		tempIndicator.className = "color-blue";
+	}
+	tempIndicator.innerHTML = newTemp+"°C";
+	currentTemp = newTemp;
+}
+
+function startTempAnimation() {
+	setInterval(changeTemp, 3000);
+}
+
+function stopTempAnimation() {
+	clearInterval(changeTemp);
+}
+
+document.getElementById("controls-page-auto-button").addEventListener("click", function(){
+	var h = document.getElementById("auto-close-hour-input").value;
+	var m = document.getElementById("auto-close-minute-input").value;
+	if (h < 0 || h >= 12 || m < 0 || m > 59 || (h == 0 && m == 0) || (h == "" && m == "")) {
+		alert("Input Invalid \nHours: 0-12, Minutes: 0-59\ntotal time cannot be 0");
+	}
+	else {
+		var hour = h;
+		if (hour == "" || hour == 0){
+			hour = 0;
+		}
+		else {
+			var hour = parseInt(h, 10);
+		}
+		var min = parseInt(m, 10);
+		document.getElementById("curr-auto-close").innerText = "Auto close if door open for "+(hour<10?("0"+hour):hour)+" h "+(min<10?("0"+min):min)+" m";
+					// alert("Success! Garage Door will close after "+h+" hours and "+m+" minutes");
+					currUser.autoClose = true;
+				}
+				document.getElementById("auto-close-hour-input").value = 0;
+				document.getElementById("auto-close-minute-input").value = 0;
+			});
+
+
+document.getElementById("notif-submit-btn").addEventListener("click", function(){
+				// get checkbox values
+				var notifOpen = document.getElementById("notif-open").checked;
+				var notifClose = document.getElementById("notif-close").checked;
+				var notifLeftOpen = document.getElementById("notif-left-open").checked;
+				var notifTempHi = document.getElementById("notif-temp-hi").checked;
+				var notifTempLo = document.getElementById("notif-temp-lo").checked;
+
+				var output = "Notification will be sent when:\n";
+
+				if (notifOpen) {
+					output += "• Door opens\n";
+					document.getElementById("notif-open").checked = false;
+				}
+				if (notifClose) {
+					output += "• Door closes\n";
+					document.getElementById("notif-close").checked = false;
+				}
+
+				if (notifLeftOpen){
+					// left open time
+					var h = document.getElementById("notif-open-hour").value;
+					var m = document.getElementById("notif-open-minute").value;
+					if (h < 0 || h >= 12 || m < 0 || m > 59 || (h == 0 && m == 0) || (h == "" && m == "")) {
+						alert("Input Invalid \nHours: 0-12, Minutes: 0-59\ntotal time cannot be 0");
 					}
 					else {
-						indicator.className = "color-blue";
-						indicator.innerHTML = "OPEN";
-						button.innerHTML = "CLOSE";
+						var hour = h;
+						if (hour == ""){
+							hour = 0;
+						}
+						else {
+							hour = parseInt(h, 10);
+						}
+						var min = parseInt(m, 10);
+						output += "• Door open for "+(hour<10?("0"+hour):hour)+" h "+(min<10?("0"+min):min)+" m\n";
+
 					}
-					doorStatus = !doorStatus;
-				} else {
-					width = width + 0.2;  
-					m.style.width = width + '%'; 
+					document.getElementById("notif-left-open").checked = false;
+					document.getElementById("notif-open-hour").value = 0;
+					document.getElementById("notif-open-minute").value = 0;
 				}
-			}
-		}
+				if (notifTempHi){
+					var hi = document.getElementById("notif-temp-hi-val").value;
+					if (hi <-40 || hi > 40 || hi == "") {
+						alert("Input invalid: high temperature\nValue must be (-40, 40) celsius");
+					} else {
+						var hiTemp = hi;
+						if (hiTemp == ""){
+							hiTemp = 0;
+						} else {
+							hiTemp = parseInt(hiTemp, 10);
+						}
+						output += "• Temperature higher than " + hiTemp + " degrees Celcius\n";
+						document.getElementById("notif-temp-hi").checked = false;
+						document.getElementById("notif-temp-hi-val").value = "";
+					}
+				}
+				if (notifTempLo){
+					var lo = document.getElementById("notif-temp-lo-val").value;
+					if (lo <-40 || lo > 40 || lo == "") {
+						alert("Input invalid: low temperature\nValue must be (-40,40) celsius");
+					} else {
+						var loTemp = lo;
+						if (loTemp == ""){
+							loTemp = 0;
+						} else {
+							loTemp = parseInt(loTemp, 10);
+						}
+						output += "• Temperature lower than " + loTemp + " degrees Celcius";
+						document.getElementById("notif-temp-lo").checked = false;
+						document.getElementById("notif-temp-lo-val").value = "";
 
-		document.getElementById("controls-page-see-camera-button").addEventListener("click", function(){
-			changeVisibility("camera-page");
-			stopTempAnimation();
-		});
+					}
+				}
+				document.getElementById("curr-notif").innerText = output;
+			});
 
-		function changeTemp() {
-			var newTemp = Math.floor(Math.random()*30 + 10);
-			var tempIndicator = document.getElementById("controls-page-temp-indicator");
-			if (newTemp >= 30) {
-				tempIndicator.className = "color-red";
-			}
-			else {
-				tempIndicator.className = "color-blue";
-			}
-			tempIndicator.innerHTML = newTemp+"°C";
-			currentTemp = newTemp;
-		}
 
-		function startTempAnimation() {
-			setInterval(changeTemp, 3000);
-		}
 
-		function stopTempAnimation() {
-			clearInterval(changeTemp);
-		}
-
-		document.getElementById("controls-page-auto-button").addEventListener("click", function(){
-			var h = document.getElementById("auto-close-hour-input").value;
-			var m = document.getElementById("auto-close-minute-input").value;
-			if (h < 0 | h >= 12 | m < 0 | (h == "" && m == "")) {
-				alert("Error: Please input valid time to use the Auto Close feature. Hours should be less than 12. ");
-			}
-			else {
-				alert("Success! Garage Door will close after "+h+" hours and "+m+" minutes");
-			}
-			document.getElementById("auto-close-hour-input").value = "";
-			document.getElementById("auto-close-minute-input").value = "";
-		});
-
-		document.getElementById("auto-close-slider").addEventListener("change", function(){
-			console.log(document.getElementById("auto-close-slider").value);
-			var checkbox = document.getElementById("auto-close-slider");
-			if (checkbox.checked) {
-				alert("Auto Close feature is Enabled!");
-			}
-			else {
-				alert("Auto Close feature is Disabled!");
-			}
-		});
-
-		//camera page js
-		document.getElementById("camera-page-controls-button").addEventListener("click", function(){
+		// camera page js
+		document.getElementById("controls-button").addEventListener("click", function(){
 			changeVisibility("controls-page");
-			startTempAnimation();
+
 		});
 
-		document.getElementById("camera-page-cameras-button").addEventListener("click", function(){
-			changeVisibility("camera-page");
-		});
+		// document.getElementById("cameras-button").addEventListener("click", function(){
+		// 	changeVisibility("camera-page");
 
-		function setAutoCloseDisplay(autoClose){
-			if(autoClose){
-				console.log("auto close is on");
-				document.getElementById("auto-close-time-form").style.display = "initial";
-				document.getElementById("controls-page-auto-button").style.display = "initial";
+		// 	startTempAnimation();
+		// });
+
+function setAutoCloseDisplay(autoClose){
+	if(autoClose){
+		document.getElementById("auto-close-time-form").style.display = "initial";
+		document.getElementById("controls-page-auto-button").style.display = "initial";
+		document.getElementById("auto-close-disabled").style.display = "none";
+		currUser.autoClose = true;
+	} else {
+		document.getElementById("auto-close-time-form").style.display = "none";
+		document.getElementById("controls-page-auto-button").style.display = "none";
+		document.getElementById("auto-close-disabled").style.display = "initial";
+		document.getElementById("auto-close-disabled").style.color = "gray";
+				// document.getElementById("curr-auto-close").innerText = "No auto-close setup";
+				currUser.autoClose = false;
+
+
+			}
+		}
+
+		function setNotifDisplay(notif){
+			if(notif){
+				document.getElementById("notif-options").style.display="initial";
+				document.getElementById("notif-submit-btn").style.display="initial";
+				document.getElementById("notif-disabled").style.display = "none";
+				currUser.notif = true;
 			} else {
-				console.log("auto close is off");
-				document.getElementById("auto-close-time-form").style.display = "none";
-				document.getElementById("controls-page-auto-button").style.display = "none";
+				document.getElementById("notif-options").style.display="none";
+				document.getElementById("notif-submit-btn").style.display="none";
+				document.getElementById("notif-disabled").style.display = "initial";
+				document.getElementById("notif-disabled").style.color = "gray";
+				// document.getElementById("curr-notif").innerText = "No notification is setup";
+				currUser.notif = false;
+
 			}
 		}
 		</script>
