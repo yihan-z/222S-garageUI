@@ -13,7 +13,7 @@
 	<!-- Latest compiled JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-	<title>Login</title>
+	<title>Smart Garage</title>
 </head>
 <body>
 	<!--Login Page Starts Here-->
@@ -31,11 +31,11 @@
 				<div class="row">
 					<div class="centered">
 						<div class="login-box">
-							<input class="login-input" type="text" placeholder="Enter Username" name="uname" required>
+							<input class="login-input" type="text" placeholder="Enter Username" id="uname" name="uname" required>
 						</div>
 						
 						<div class="login-box">
-							<input class="login-input" type="password" placeholder="Enter Password" name="psw" required>
+							<input class="login-input" type="password" placeholder="Enter Password" id="pwd" name="psw" required>
 						</div>
 						
 						<br>
@@ -71,7 +71,7 @@
 					<div class="centered">
 						<div class="row">
 							<div class="login-box">
-								<input class="login-input" type="text" placeholder="Enter Username">
+								<input class="login-input" type="text" id="rec-uname" placeholder="Enter Username">
 							</div>
 						</div>
 						<div>
@@ -79,7 +79,7 @@
 						</div>
 						<div class="row">
 							<div class="login-box">
-								<input class="login-input" type="email" placeholder="Enter Email">
+								<input class="login-input" type="email" id="rec-email" placeholder="Enter Email">
 							</div>
 						</div>
 						<br>
@@ -111,30 +111,30 @@
 				<br>
 				<div class="centered">
 					<div class="login-box">
-						<input class="login-input" type="text" placeholder="Enter Username" name="uname" required>
+						<input class="login-input" type="text" placeholder="Enter Username" id="reg-uname" name="uname" required>
 					</div>
 				</div>
 				<div class="centered">
 					<div class="login-box">
-						<input class="login-input" type="password" placeholder="Enter Password" name="psw" required>
+						<input class="login-input" type="password" placeholder="Enter Password" id="reg-pwd" name="psw" required>
 					</div>
 				</div>
 				<div class="centered">
 					<div class="login-box">
-						<input class="login-input" type="password" placeholder="Repeat Password" name="psw-repeat" required>
+						<input class="login-input" type="password" placeholder="Repeat Password" id="reg-pwd-confirm" name="psw-repeat" required>
 					</div>
 				</div>
 				<div class="centered">
 					<div class="login-box">
-						<input class="login-input" type="text" placeholder="Enter Phone Number" name="phone" required>
+						<input class="login-input" type="text" placeholder="Enter Phone Number" id="reg-phone" name="phone" required>
 					</div>
 				</div>
 				<div class="centered">
 					<div class="login-box">
-						<input class="login-input" type="text" placeholder="Enter Garage ID" name="garage" required>
+						<input class="login-input" type="text" placeholder="Enter Garage ID" id="reg-garageId" name="garage" required>
 					</div>
 				</div>
-				<div class="centered"><input type="checkbox" checked="checked"> Remember me
+				<div class="centered"><input type="checkbox" id="remember" checked="checked"> Remember me
 					<p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
 				</div>
 				<div class="clearfix centered">
@@ -158,11 +158,11 @@
 		</div>
 		<div class="fluid-container">
 			<div id="device-list" class="dropdown">
-				<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Choose Device ...&nbsp;<span class="caret"></span>
+				<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" id="control-dropdown-overview">Choose Device ...&nbsp;<span class="caret"></span>
 				</button>
 				<ul class="dropdown-menu">
-					<li><a href="#" data-value="gd1">Front Garage Door 1 --- <span style="color: blue">OPEN</span></a></li>
-					<li><a href="#" data-value="gd2">Front Garage Door 2 --- <span style="color: black">CLOSED</span></a></li>
+					<li><a href="#" data-value="gd1" id="control-garage" selected> Front Garage Door 1 --- <span style="color: blue">OPEN</span></a></li>
+					<!-- <li><a href="#" data-value="gd2">Front Garage Door 2 --- <span style="color: black">CLOSED</span></a></li> -->
 					<li class="divider"></li>
 					<li><a href="#" data-value="add-device">Add</a></li>
 					<li><a href="#" data-value="delete-device">Delete</a></li>
@@ -172,7 +172,7 @@
 			<!--Below Navigation Bar-->
 			<div id="control-board" class="row">
 				<div class="col-sm-4" id="controls-page-left-panel">
-					<h3>Device Name</h3>
+					<h3 id="control-device-name">Device Name</h3>
 					<h4>Status: 
 						<span class="color-blue" id="controls-page-status-indicator">OPEN</span>
 					</h4>
@@ -191,7 +191,7 @@
 									<a data-toggle="collapse" href="#collapse1">Auto Close</a>
 									<label class="switch">
 										<input type="checkbox" id="auto-close-slider">
-										<span class="slider"></span>
+										<span class="slider" value="off"></span>
 									</label>
 								</h4>
 							</div>
@@ -199,15 +199,22 @@
 								<div class="panel-body">
 									<div>
 										<div>
-											<div class="control-div" action="#">
+											<div class="control-div" id="auto-close-div" action="#">
 												<div class="time-div">
-													<p>Set the door to close after </p>
-													<input type="number" class="time-input" name="auto-hour" id="auto-close-hour-input">&nbsp;&nbsp;&nbsp;
-													<span>Hour(s)</span>
-													<input type="number" class="time-input" name="auto-minute" id="auto-close-minute-input">
-													<span>Minutes(s)</span>
+													<div class="checkbox">
+														<label>
+															<input type="checkbox" onchange='setAutoCloseDisplay(this.checked);' id="auto-close-switch"> Set Auto Close
+														</label>
+													</div>
+													<div id="auto-close-time-form">
+														<input type="number" class="time-input auto-time-input" name="auto-hour" id="auto-close-hour-input" min="0" max="24" value="0">
+														<span class="auto-time-text">Hour(s)&nbsp;&nbsp;</span>
+														<input type="number" class="time-input auto-time-input" name="auto-minute" id="auto-close-minute-input" min="1" max="59" value="1">
+														<span class="auto-time-text">Minutes(s)</span>
+													</div>
 												</div>
 												<input type="button" class="btn btn-primary" id="controls-page-auto-button" value="Submit">
+
 											</div>
 										</div>
 									</div>
@@ -240,8 +247,8 @@
 													<input type="checkbox" value="">
 													Door left open for
 													<div>
-														<input type="number" class="time-input" name="open-hour">&nbsp;&nbsp;Hour(s)&nbsp;
-														<input type="number" class="time-input" name="open-minute">&nbsp;&nbsp;Minute(s)
+														<input type="number" class="time-input" name="open-hour" min="0" max="24" value="0">&nbsp;&nbsp;Hour(s)&nbsp;
+														<input type="number" class="time-input" name="open-minute" min="1" max="59" value="1">&nbsp;&nbsp;Minute(s)
 													</div>
 												</div>
 											</li>
@@ -341,8 +348,39 @@
 	<!--Camera Page Ends Here-->
 	<!--JavaScripts Code Here-->
 	<script type="text/javascript">
-		//doorStatus true for open, false for close
-		var doorStatus = true;
+		// User class
+		class User {
+			constructor(username, password, phone, garageId) {
+				this.username = username;
+				this.password = password;
+				this.phone = phone;
+				this.garageId = garageId;
+				this.doorOpen = false;
+				this.autoClose = false;
+				this.notif=false;
+			}
+		}
+
+		// class Garage {
+		// 	constructor(garageId, autoTime, notif){
+		// 		this.garageId = garageId;
+		// 		this.autoTime = autoTime;
+		// 		this.notif = notif;
+		// 	}
+		// }
+
+		// set to hold all users
+		var users = new Array();
+		users.push(new User("yihan", "12345", "3144358056", "garage1", true));
+		users.push(new User("cheng", "54321", "3144356666", "chenggarage", false));
+
+		// remember me
+		var remembered;
+		if (remembered != null){
+			document.getElementById("uname").value=remembered.username;
+			document.getElementById("pwd").value=remembered.password;
+		}
+
 		var currentTemp = 26;
 		var currentPage = "login-page";
 		var pages = ["login-page", "pwd-recovery-page", "register-page", "controls-page", "camera-page"];
@@ -353,26 +391,101 @@
 		}
 
 		//login page js
+		var loggedIn = false;
+		var currUser = null;
+
 		document.getElementById("login-page-login-button").addEventListener("click", function(){
-			var controlsButton = document.getElementById("controls-page-controls-button");
-			controlsButton.className = "navbar-button-selected";
-			controlsButton.disabled = true;
-			changeVisibility("controls-page");
-			startTempAnimation();
+			var loginUname = document.getElementById("uname").value;
+			var loginPwd = document.getElementById("pwd").value;
+			console.log(loginUname + ", " + loginPwd);
+			document.getElementById("uname").value="";
+			document.getElementById("pwd").value="";
+			for (var i = 0; i < users.length; i++){
+				var u = users[i];
+				if (u.username == loginUname && u.password == loginPwd){ // if login successful
+					loggedIn=true;
+					currUser = u;
+					if(document.getElementById("remember").checked){ // set remember me
+						remembered = u;
+						console.log("remembering: " + remembered);
+					} else {
+						remembered = null;
+					}
+
+					// Setting up control page entries
+					var controlsButton = document.getElementById("controls-page-controls-button");
+					controlsButton.className = "navbar-button-selected";
+					controlsButton.disabled = true;
+					document.getElementById("control-device-name").innerText = currUser.garageId;
+					document.getElementById("control-dropdown-overview").innerHTML=currUser.garageId+'&nbsp;<span class="caret"></span>';
+					console.log(currUser.garageId);
+					var status = "";
+					if (currUser.doorOpen){
+						status = "OPEN";
+						document.getElementById("controls-page-status-indicator").className = "color-blue";
+						document.getElementById("controls-page-close-button").innerText = "CLOSE";
+					} else {
+						status = "CLOSED";
+						document.getElementById("controls-page-status-indicator").className = "color-red";
+						document.getElementById("controls-page-close-button").innerText = "OPEN";
+					}
+					document.getElementById("control-garage").innerText = currUser.garageId;
+					document.getElementById("controls-page-status-indicator").innerText = status;
+
+					// autotime status
+					var autoClose = document.getElementById("auto-close-switch").checked;
+					// if(autoClose){
+					// 	console.log("auto close is on");
+					// 	document.getElementById("auto-close-time-form").style.display = "initial";
+					// 	document.getElementById("controls-page-auto-button").style.display = "initial";
+					// } else {
+					// 	console.log("auto close is off");
+					// 	document.getElementById("auto-close-time-form").style.display = "none";
+					// 	document.getElementById("controls-page-auto-button").style.display = "none";
+					// }
+					setAutoCloseDisplay(autoClose);
+
+					changeVisibility("controls-page");
+					startTempAnimation();
+					break;
+				}
+			}				
+			if (!loggedIn){
+				alert("Username/Password incorrect. Please log in again.");
+			}
 		});
 
-		document.getElementById("login-page-forgot-pwd-button").addEventListener("click", function(){
-			changeVisibility("pwd-recovery-page");
-		});
+document.getElementById("login-page-forgot-pwd-button").addEventListener("click", function(){
+	changeVisibility("pwd-recovery-page");
+});
 
-		document.getElementById("login-page-register-button").addEventListener("click", function(){
-			changeVisibility("register-page");
-		});
+document.getElementById("login-page-register-button").addEventListener("click", function(){
+	changeVisibility("register-page");
+});
 
 		//pwd recovery page js
 		document.getElementById("pwd-recovery-page-recover-button").addEventListener("click", function(){
-			alert("This will be the password");
-			changeVisibility("login-page");
+			var recUname = document.getElementById("rec-uname");
+			var recEmail = document.getElementById("rec-email");
+			if(recUname.value==""||recEmail.value==""){
+				alert("Please enter username or email.");
+			} else {
+				var foundMatch = false;
+				for (var i = 0; i < users.length; i++){
+					var u = users[i];
+					if (u.username == recUname.value || u.email == recEmail.value){
+						alert("An email containing your password has been sent to your mailbox: " + u.email);
+						foundMatch = true;	
+						break;
+					}
+				}
+
+				if (!foundMatch){
+					alert("Sorry. The username/email you entered is not found.");
+				} else {
+					changeVisibility("login-page");
+				}
+			}
 		});
 
 		document.getElementById("pwd-recovery-page-cancel-button").addEventListener("click", function(){
@@ -389,8 +502,29 @@
 		});
 
 		document.getElementById("register-page-signup-button").addEventListener("click", function(){
-			alert("Call Register Function!");
-			changeVisibility("login-page");
+			//alert("Call Register Function!");
+			var regUname = document.getElementById("reg-uname");
+			var regPwd = document.getElementById("reg-pwd");
+			var regPwdConfirm = document.getElementById("reg-pwd-confirm");
+			var regPhone = document.getElementById("reg-phone");
+			var regGarageId = document.getElementById("reg-garageId");
+
+			if (regPwd.value != regPwdConfirm.value){
+				alert("Password inconsistent. Please enter again");
+				regPwd.value="";
+				regPwdConfirm.value="";
+			}
+			else { // data valid, registering new user
+				var newUser = new User(regUname.value, regPwd.value, regPhone.value, regGarageId.value);
+				users.push(newUser);
+
+				for (var i = 0; i < users.length; i++){
+					console.log(users[i].username);
+				}
+
+				changeVisibility("login-page");
+
+			}
 		});
 
 		//controls page js
@@ -399,7 +533,11 @@
 			stopTempAnimation();
 		});
 
+			// document.getElementById("auto-close-switch").addEventListener('change', setAutoCloseDisplay(document.getElementById("auto-close-switch").checked));
+
 		document.getElementById("controls-page-close-button").addEventListener("click", function(){
+			currUser.doorOpen = !currUser.doorOpen;
+
 			var d = document.createElement("div");
 			d.className = "statusBarContainer";
 			d.id = "status-bar-container";
@@ -412,6 +550,7 @@
 		});
 
 		function animationDoor() {
+			var doorStatus = currUser.doorOpen;
 			var m = document.getElementById("status-bar-move");
 			var d = document.getElementById("status-bar-container");
 			var width = 0;
@@ -481,6 +620,7 @@
 		});
 
 		document.getElementById("auto-close-slider").addEventListener("change", function(){
+			console.log(document.getElementById("auto-close-slider").value);
 			var checkbox = document.getElementById("auto-close-slider");
 			if (checkbox.checked) {
 				alert("Auto Close feature is Enabled!");
@@ -500,7 +640,17 @@
 			changeVisibility("camera-page");
 		});
 
-
+		function setAutoCloseDisplay(autoClose){
+			if(autoClose){
+				console.log("auto close is on");
+				document.getElementById("auto-close-time-form").style.display = "initial";
+				document.getElementById("controls-page-auto-button").style.display = "initial";
+			} else {
+				console.log("auto close is off");
+				document.getElementById("auto-close-time-form").style.display = "none";
+				document.getElementById("controls-page-auto-button").style.display = "none";
+			}
+		}
 		</script>
 	</body>
 	</html>
