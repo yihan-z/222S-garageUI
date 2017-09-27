@@ -17,11 +17,11 @@
 </head>
 <body>
 	<!--Top Navigation Bar-->
-	<div class="container tabbar" id="nav-bar">
-		<span class="right-align">Smart Garage</span>
+	<div class="tabbar" id="nav-bar">
 		<ul class="nav nav-tabs">
 			<li data-toggle="tab" class="active" id="controls-button"><a href="#controls-page">Controls</a></li>
 			<li data-toggle="tab" id="cameras-button"><a href="#camera-page">Cameras</a></li>
+			<span class="right-align">Smart Garage</span>
 		</ul>
 	</div>
 
@@ -155,197 +155,197 @@
 	</div>
 	<!--Register Page Ends Here-->
 
-<div class="tab-content">
-	<!--Controls Page Starts Here-->
-	<div id="controls-page" hidden>
+	<div class="tab-content">
+		<!--Controls Page Starts Here-->
+		<div id="controls-page" hidden>
 
-		<div class="fluid-container">
-			<div id="device-list" class="dropdown">
-				<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" id="control-dropdown-overview">Choose Device ...&nbsp;<span class="caret"></span>
-				</button>
-				<ul class="dropdown-menu">
-					<li><a href="#" data-value="gd1" id="control-garage" selected> Front Garage Door 1 --- <span style="color: blue">OPEN</span></a></li>
-					<!-- <li><a href="#" data-value="gd2">Front Garage Door 2 --- <span style="color: black">CLOSED</span></a></li> -->
-					<li class="divider"></li>
-					<li><a href="#" data-value="add-device">Add</a></li>
-					<li><a href="#" data-value="delete-device">Delete</a></li>
-				</ul>
-			</div>
-			<br>
-			<!--Below Navigation Bar-->
-			<div id="control-board" class="row">
-				<div class="col-sm-4" id="controls-page-left-panel">
-					<h3 id="control-device-name">Device Name</h3>
-					<h4>Status: 
-						<span class="color-blue" id="controls-page-status-indicator">OPEN</span>
-					</h4>
-					<h4>
-						Current Temperature is <span class="color-blue" id="controls-page-temp-indicator">26°C</span>
-					</h4>
-					<button class="btn btn-primary btn-block" id="controls-page-close-button">CLOSE</button>
-					<button class="btn btn-primary btn-block" id="controls-page-see-camera-button">SEE SECURITY CAMERA</button>
+			<div class="fluid-container">
+				<div id="device-list" class="dropdown">
+					<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" id="control-dropdown-overview">Choose Device ...&nbsp;<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu">
+						<li><a href="#" data-value="gd1" id="control-garage" selected> Front Garage Door 1 --- <span style="color: blue">OPEN</span></a></li>
+						<!-- <li><a href="#" data-value="gd2">Front Garage Door 2 --- <span style="color: black">CLOSED</span></a></li> -->
+						<li class="divider"></li>
+						<li><a href="#" data-value="add-device">Add</a></li>
+						<li><a href="#" data-value="delete-device">Delete</a></li>
+					</ul>
 				</div>
-				<!--Right Portion-->
-				<div id="advanced-controls" class="col-sm-8">
-					<div class="panel-group">
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h4 class="panel-title">
-									<a data-toggle="collapse" href="#collapse1">Auto Close</a>
-									<label class="switch">
-										<input type="checkbox" onchange='setAutoCloseDisplay(this.checked);' id="auto-close-slider">
-										<span class="slider" value="off"></span>
-									</label>
-								</h4>
-							</div>
-							<div id="collapse1" class="panel-collapse collapse in">
-								<div class="panel-body">
-									<div>
+				<br>
+				<!--Below Navigation Bar-->
+				<div id="control-board" class="row">
+					<div class="col-sm-4" id="controls-page-left-panel">
+						<h3 id="control-device-name">Device Name</h3>
+						<h4>Status: 
+							<span class="color-blue" id="controls-page-status-indicator">OPEN</span>
+						</h4>
+						<h4>
+							Current Temperature is <span class="color-blue" id="controls-page-temp-indicator">26°C</span>
+						</h4>
+						<button class="btn btn-primary btn-block" id="controls-page-close-button">CLOSE</button>
+						<button class="btn btn-primary btn-block" id="controls-page-see-camera-button">SEE SECURITY CAMERA</button>
+					</div>
+					<!--Right Portion-->
+					<div id="advanced-controls" class="col-sm-8">
+						<div class="panel-group">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title">
+										<a data-toggle="collapse" href="#collapse1">Auto Close</a>
+										<label class="switch">
+											<input type="checkbox" onchange='setAutoCloseDisplay(this.checked);' id="auto-close-slider">
+											<span class="slider" value="off"></span>
+										</label>
+									</h4>
+								</div>
+								<div id="collapse1" class="panel-collapse collapse in">
+									<div class="panel-body">
 										<div>
-											<div class="time-div">
-												<div id="auto-close-time-form">
-													<div id="curr-auto-close" class="curr-status">No auto-close setup</div>
+											<div>
+												<div class="time-div">
+													<div id="auto-close-time-form">
+														<div id="curr-auto-close" class="curr-status">No auto-close setup</div>
 
-													<input type="number" class="time-input auto-time-input" name="auto-hour" id="auto-close-hour-input" min="0" max="12" value="0">
-													<span class="auto-time-text">Hour(s)&nbsp;&nbsp;</span>
-													<input type="number" class="time-input auto-time-input" name="auto-minute" id="auto-close-minute-input" min="0" max="59" value="0">
-													<span class="auto-time-text">Minutes(s)</span>
+														<input type="number" class="time-input auto-time-input" name="auto-hour" id="auto-close-hour-input" min="0" max="12" value="0">
+														<span class="auto-time-text">Hour(s)&nbsp;&nbsp;</span>
+														<input type="number" class="time-input auto-time-input" name="auto-minute" id="auto-close-minute-input" min="0" max="59" value="0">
+														<span class="auto-time-text">Minutes(s)</span>
+													</div>
+													<div id="auto-close-disabled" class="disabled-status">Auto Close is disabled</div>
+
 												</div>
-												<div id="auto-close-disabled" class="disabled-status">Auto Close is disabled</div>
+												<input type="button" class="btn btn-primary" id="controls-page-auto-button" value="Submit">
 
 											</div>
-											<input type="button" class="btn btn-primary" id="controls-page-auto-button" value="Submit">
-
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h4 class="panel-title">
-									<a data-toggle="collapse" href="#collapse2">
-										Notification Options
-									</a>
-									<label class="switch">
-										<input type="checkbox" onchange='setNotifDisplay(this.checked);' id="notif-slider">
-										<span class="slider" value="off"></span>
-									</label>
-								</h4>
-							</div>
-							<div id="collapse2" class="panel-collapse collapse">
-								<div class="panel-body">
-									<div class="time-div">
-										<div class="control-div" action="#"  id="notif-options">
-											<div id="curr-notif" class="curr-status">No notification is setup</div>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title">
+										<a data-toggle="collapse" href="#collapse2">
+											Notification Options
+										</a>
+										<label class="switch">
+											<input type="checkbox" onchange='setNotifDisplay(this.checked);' id="notif-slider">
+											<span class="slider" value="off"></span>
+										</label>
+									</h4>
+								</div>
+								<div id="collapse2" class="panel-collapse collapse">
+									<div class="panel-body">
+										<div class="time-div">
+											<div class="control-div" action="#"  id="notif-options">
+												<div id="curr-notif" class="curr-status">No notification is setup</div>
 
-											<!-- <p>Text notifications will be sent when</p> -->
+												<!-- <p>Text notifications will be sent when</p> -->
 
-											<ul id="notif-list">
-												<li id="notif-time">
-													<div>
-														<input type="checkbox" id="notif-open" value="">
-														Door opens
-													</div>
-													<div>
-														<input type="checkbox" id="notif-close" value="">
-														Door closes
-													</div>
-													<div>
-														<input type="checkbox" id="notif-left-open" value="">
-														Door left open for
+												<ul id="notif-list">
+													<li id="notif-time">
 														<div>
-															<input type="number" class="time-input" id="notif-open-hour" name="open-hour" min="0" max="12" value="0">&nbsp;&nbsp;Hour(s)&nbsp;
-															<input type="number" class="time-input" id="notif-open-minute" name="open-minute" min="0" max="59" value="0">&nbsp;&nbsp;Minute(s)
+															<input type="checkbox" id="notif-open" value="">
+															Door opens
 														</div>
-													</div>
-												</li>
-												<li id="notif-temp">
-													<div>
-														<input type="checkbox" id="notif-temp-hi" value="">
-														Garage temperature is higher than
 														<div>
-															<input type="number" id="notif-temp-hi-val" placeholder="Celsius">
+															<input type="checkbox" id="notif-close" value="">
+															Door closes
 														</div>
-													</div>
-													<div>
-														<input type="checkbox" id="notif-temp-lo" value="">
-														Garage temperature is lower than
 														<div>
-															<input type="number" id="notif-temp-lo-val" placeholder="Celsius">
+															<input type="checkbox" id="notif-left-open" value="">
+															Door left open for
+															<div>
+																<input type="number" class="time-input" id="notif-open-hour" name="open-hour" min="0" max="12" value="0">&nbsp;&nbsp;Hour(s)&nbsp;
+																<input type="number" class="time-input" id="notif-open-minute" name="open-minute" min="0" max="59" value="0">&nbsp;&nbsp;Minute(s)
+															</div>
 														</div>
-													</div>
-												</li>
-											</ul>
-											<input type="button" class="btn btn-primary" id="notif-submit-btn" value="Update">
+													</li>
+													<li id="notif-temp">
+														<div>
+															<input type="checkbox" id="notif-temp-hi" value="">
+															Garage temperature is higher than
+															<div>
+																<input type="number" id="notif-temp-hi-val" placeholder="Celsius">
+															</div>
+														</div>
+														<div>
+															<input type="checkbox" id="notif-temp-lo" value="">
+															Garage temperature is lower than
+															<div>
+																<input type="number" id="notif-temp-lo-val" placeholder="Celsius">
+															</div>
+														</div>
+													</li>
+												</ul>
+												<input type="button" class="btn btn-primary" id="notif-submit-btn" value="Update">
+											</div>
+											<div id="notif-disabled" class="disabled-status">Notification is disabled</div>
 										</div>
-										<div id="notif-disabled" class="disabled-status">Notification is disabled</div>
 									</div>
 								</div>
 							</div>
-						</div>
 
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h4 class="panel-title">
-									<a data-toggle="collapse" href="#collapse3">
-										Custom Feature
-									</a>
-								</h4>
-							</div>
-
-							<div id="collapse3" class="panel-collapse collapse">
-								<div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-									sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-									minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-									commodo consequat.
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title">
+										<a data-toggle="collapse" href="#collapse3">
+											Custom Feature
+										</a>
+									</h4>
 								</div>
 
+								<div id="collapse3" class="panel-collapse collapse">
+									<div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+										sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+										minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+										commodo consequat.
+									</div>
+
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<!--Controls Page Ends Here-->
-	<!--Camera Page Starts Here-->
-	<div id="camera-page" hidden>
+		<!--Controls Page Ends Here-->
+		<!--Camera Page Starts Here-->
+		<div id="camera-page" hidden>
 
-		<div class="fluid-container">
-			<div id="device-list" class="dropdown">
-				<button class="btn btn-default dropdown-toggle" type="button" id="camera-control-dropdown-overview" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Choose Device ...&nbsp;<span class="caret"></span>
-				</button>
-				<ul class="dropdown-menu">
-					<li><a href="#" data-value="gd1" id="cameras-garage">Front Garage Door 1</span></a></li>
-					<li class="divider"></li>
-					<li><a href="#" data-value="add-device">Add</a></li>
-					<li><a href="#" data-value="delete-device">Delete</a></li>
-				</ul>
-			</div>
-			<br>
-			<div id="control-board" class="row">
-				<!--Left Menu Panel-->
-				<div class="col-sm-4">
-					<h3 id="camera-control-device-name">Device Name</h3>
-					<h4>Status: 
-						<span style="color: red" id="cameras-page-status-indicator">CLOSED</span>
-					</h4>
-					<h4>
-						Current Temperature is <span style="color: red">26°C</span>
-					</h4>
-					<button class="btn btn-primary btn-block" style="max-width: 300px" id="cameras-page-close-button">CLOSE</button>
-					<button class="btn btn-primary btn-block" style="max-width: 300px">PLAY/PAUSE</button>
+			<div class="fluid-container">
+				<div id="device-list" class="dropdown">
+					<button class="btn btn-default dropdown-toggle" type="button" id="camera-control-dropdown-overview" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Choose Device ...&nbsp;<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu">
+						<li><a href="#" data-value="gd1" id="cameras-garage">Front Garage Door 1</span></a></li>
+						<li class="divider"></li>
+						<li><a href="#" data-value="add-device">Add</a></li>
+						<li><a href="#" data-value="delete-device">Delete</a></li>
+					</ul>
 				</div>
-				<!--Right Portion-->
-				<div id="advanced-controls" class="col-sm-8">
-					<div class='embed-container'>
-						<iframe src='https://www.youtube.com/embed/ZOpWO7rJbtU?autoplay=1' allowfullscreen></iframe>
+				<br>
+				<div id="control-board" class="row">
+					<!--Left Menu Panel-->
+					<div class="col-sm-4">
+						<h3 id="camera-control-device-name">Device Name</h3>
+						<h4>Status: 
+							<span style="color: red" id="cameras-page-status-indicator">CLOSED</span>
+						</h4>
+						<h4>
+							Current Temperature is <span style="color: red">26°C</span>
+						</h4>
+						<button class="btn btn-primary btn-block" style="max-width: 300px" id="cameras-page-close-button">CLOSE</button>
+						<button class="btn btn-primary btn-block" style="max-width: 300px">PLAY/PAUSE</button>
+					</div>
+					<!--Right Portion-->
+					<div id="advanced-controls" class="col-sm-8">
+						<div class='embed-container'>
+							<iframe src='https://www.youtube.com/embed/ZOpWO7rJbtU?autoplay=1' allowfullscreen></iframe>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 	</div>
 	<!--Camera Page Ends Here-->
 	<!--JavaScripts Code Here-->
@@ -391,6 +391,8 @@
 			document.getElementById(currentPage).setAttribute("hidden", '');
 			currentPage = pageToShow;
 		}
+
+		document.getElementById("nav-bar").style.display="none";
 
 		//login page js
 		var loggedIn = false;
@@ -658,11 +660,9 @@ document.getElementById("notif-submit-btn").addEventListener("click", function()
 
 				if (notifOpen) {
 					output += "• Door opens\n";
-					document.getElementById("notif-open").checked = false;
 				}
 				if (notifClose) {
 					output += "• Door closes\n";
-					document.getElementById("notif-close").checked = false;
 				}
 
 				if (notifLeftOpen){
@@ -684,9 +684,7 @@ document.getElementById("notif-submit-btn").addEventListener("click", function()
 						output += "• Door open for "+(hour<10?("0"+hour):hour)+" h "+(min<10?("0"+min):min)+" m\n";
 
 					}
-					document.getElementById("notif-left-open").checked = false;
-					document.getElementById("notif-open-hour").value = 0;
-					document.getElementById("notif-open-minute").value = 0;
+
 				}
 				if (notifTempHi){
 					var hi = document.getElementById("notif-temp-hi-val").value;
@@ -700,8 +698,7 @@ document.getElementById("notif-submit-btn").addEventListener("click", function()
 							hiTemp = parseInt(hiTemp, 10);
 						}
 						output += "• Temperature higher than " + hiTemp + " degrees Celcius\n";
-						document.getElementById("notif-temp-hi").checked = false;
-						document.getElementById("notif-temp-hi-val").value = "";
+
 					}
 				}
 				if (notifTempLo){
@@ -716,12 +713,19 @@ document.getElementById("notif-submit-btn").addEventListener("click", function()
 							loTemp = parseInt(loTemp, 10);
 						}
 						output += "• Temperature lower than " + loTemp + " degrees Celcius";
-						document.getElementById("notif-temp-lo").checked = false;
-						document.getElementById("notif-temp-lo-val").value = "";
 
 					}
 				}
 				document.getElementById("curr-notif").innerText = output;
+				document.getElementById("notif-open").checked = false;
+				document.getElementById("notif-close").checked = false;
+				document.getElementById("notif-temp-hi").checked = false;
+				document.getElementById("notif-temp-hi-val").value = "";
+				document.getElementById("notif-temp-lo").checked = false;
+				document.getElementById("notif-temp-lo-val").value = "";
+				document.getElementById("notif-left-open").checked = false;
+				document.getElementById("notif-open-hour").value = 0;
+				document.getElementById("notif-open-minute").value = 0;
 			});
 
 

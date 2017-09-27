@@ -58,10 +58,10 @@
 .nav li {
   -webkit-transition-duration: 0.4s;
   transition-duration: 0.4s;
-  background-color: #efefef;
+  /*background-color: #efefef;*/
   /*border-radius: 8px;*/
-  border: 1px solid #c9e9f0;
-  margin: 5px, 3px, 0, 3px; 
+  /*border: 1px solid #c9e9f0;*/
+  /*margin: 5px, 3px, 0, 3px; */
 }
 
 .nav li a{
@@ -71,7 +71,7 @@
 .nav li:hover {
   /*background-color: white;*/
   /*color: white;*/
-  text-shadow: 1px 1px #c0f9ec; 
+  text-shadow: 2px 1px #c0f9ec; 
 }
 
 /*
@@ -85,6 +85,10 @@
   width: 100%;
   margin: 5px; 
 }*/
+
+#nav-bar{
+  background-color: #c0f9ec;
+}
 
 .nav-tabs{
 	background-color:#c0f9ec;
