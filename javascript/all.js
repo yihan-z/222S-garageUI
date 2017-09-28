@@ -11,6 +11,8 @@ class User {
 	}
 }
 
+var thisAutoCloseTime = 0;
+
 // set to hold all users
 var users = new Array();
 initializeUser();
@@ -21,6 +23,8 @@ function initializeUser() {
 	users.push(user2);
 	user1.doorOpen = true;
 }
+
+var timeOut;
 
 //remember me
 var remembered;
@@ -278,8 +282,9 @@ document.getElementById("cameras-button").addEventListener("click", function(){
 
 });
 
-document.getElementById("controls-page-close-button").addEventListener("click", function(){
+document.getElementById("controls-page-close-button").addEventListener("click", changeDoorStatus);
 
+function changeDoorStatus(){
 	var d = document.createElement("div");
 	d.className = "statusBarContainer";
 	d.id = "status-bar-container";
@@ -289,7 +294,7 @@ document.getElementById("controls-page-close-button").addEventListener("click", 
 	document.getElementById("controls-page-left-panel").appendChild(d);
 	document.getElementById("status-bar-container").appendChild(m);
 	animationDoor("controls-page-status-indicator", "controls-page-close-button", "controls-page-left-panel");
-});
+}
 
 document.getElementById("controls-page-see-camera-button").addEventListener("click", function(){
 	startTempAnimation("cameras-page-temp-indicator");
@@ -332,6 +337,12 @@ function animationDoor(indicator_id, button_id, panel_id) {
 			console.log("changing door status from " + currUser.doorOpen);
 			currUser.doorOpen = !currUser.doorOpen;
 			button.disabled = false;
+			if (currUser.doorOpen) {
+				autoClose(thisAutoCloseTime);
+			}
+			else {
+				clearTimeout(timeOut);
+			}
 		} else {
 			width = width + 0.2;  
 			m.style.width = width + '%'; 
@@ -352,6 +363,7 @@ document.getElementById("notif-slider").addEventListener("change", function(){
 document.getElementById("controls-page-auto-button").addEventListener("click", function(){
 	var h = document.getElementById("auto-close-hour-input").value;
 	var m = document.getElementById("auto-close-minute-input").value;
+	var time = h*3600000+m*60000; // in milliseconds
 	if (h < 0 || h >= 12 || m < 0 || m > 59 || (h == 0 && m == 0) || (h == "" && m == "")) {
 		alert("Input Invalid \nHours: 0-11, Minutes: 0-59\ntotal time cannot be 0");
 	}
@@ -369,7 +381,21 @@ document.getElementById("controls-page-auto-button").addEventListener("click", f
 	}
 	document.getElementById("auto-close-hour-input").value = 0;
 	document.getElementById("auto-close-minute-input").value = 0;
+	thisAutoCloseTime = time;
+	autoClose(time);
 });
+
+function autoClose(time) {
+	console.log(currUser.doorOpen);
+	if (currUser.doorOpen && currUser.autoClose && thisAutoCloseTime != 0) {
+		if (currentPage == "controls-page") {
+			timeOut = setTimeout(changeDoorStatus, time);
+		}
+		else if (currentPage == "camera-page") {
+			timeOut = setTimeout(cameraPageAutoClose, time);
+		}
+	}
+}
 
 
 document.getElementById("notif-submit-btn").addEventListener("click", function(){
@@ -545,9 +571,9 @@ function setNotifDisplay(notif){
 }
 
 //camera page JS
-document.getElementById("cameras-page-close-button").addEventListener("click", function(){
+document.getElementById("cameras-page-close-button").addEventListener("click", cameraPageAutoClose);
 
-
+function cameraPageAutoClose(){
 	var d = document.createElement("div");
 	d.className = "statusBarContainer";
 	d.id = "status-bar-container";
@@ -557,4 +583,4 @@ document.getElementById("cameras-page-close-button").addEventListener("click", f
 	document.getElementById("cameras-page-left-panel").appendChild(d);
 	document.getElementById("status-bar-container").appendChild(m);
 	animationDoor("cameras-page-status-indicator", "cameras-page-close-button", "cameras-page-left-panel");
-});
+}
