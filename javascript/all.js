@@ -279,6 +279,7 @@ document.getElementById("cameras-button").addEventListener("click", function(){
 });
 
 document.getElementById("controls-page-close-button").addEventListener("click", function(){
+
 	var d = document.createElement("div");
 	d.className = "statusBarContainer";
 	d.id = "status-bar-container";
@@ -292,9 +293,9 @@ document.getElementById("controls-page-close-button").addEventListener("click", 
 
 document.getElementById("controls-page-see-camera-button").addEventListener("click", function(){
 	startTempAnimation("cameras-page-temp-indicator");
-	changeVisibility("camera-page");
-	document.getElementById("cameras-button").className += "active";
-	document.getElementById("controls-button").className="";
+
+	document.getElementById("cameras-button").click();
+
 	stopTempAnimation("controls-page-temp-indicator");
 });
 
@@ -328,6 +329,7 @@ function animationDoor(indicator_id, button_id, panel_id) {
 				indicator.innerHTML = "OPEN";
 				button.innerHTML = "CLOSE";
 			}
+			console.log("changing door status from " + currUser.doorOpen);
 			currUser.doorOpen = !currUser.doorOpen;
 			button.disabled = false;
 		} else {
@@ -460,6 +462,22 @@ document.getElementById("controls-button").addEventListener("click", function(){
 		stopTempAnimation("cameras-page-temp-indicator");
 		document.getElementById("cameras-button").className = "";
 		document.getElementById("controls-button").className += "active";
+
+		// set up controls page entries
+		document.getElementById("control-device-name").innerText = currUser.garageId;
+		document.getElementById("control-dropdown-overview").innerHTML=currUser.garageId+'&nbsp;<span class="caret"></span>';
+		var status = "";
+		if (currUser.doorOpen){
+			status = "OPEN";
+			document.getElementById("controls-page-status-indicator").className = "color-blue";
+			document.getElementById("controls-page-close-button").innerText = "CLOSE";
+		} else {
+			status = "CLOSED";
+			document.getElementById("controls-page-status-indicator").className = "color-red";
+			document.getElementById("controls-page-close-button").innerText = "OPEN";
+		}
+		document.getElementById("control-garage").innerText = currUser.garageId;
+		document.getElementById("controls-page-status-indicator").innerText = status;
 	}
 });
 
@@ -521,7 +539,6 @@ function setNotifDisplay(notif){
 		document.getElementById("notif-submit-btn").style.display="none";
 		document.getElementById("notif-disabled").style.display = "initial";
 		document.getElementById("notif-disabled").style.color = "gray";
-		// document.getElementById("curr-notif").innerText = "No notification is setup";
 		currUser.notif = false;
 
 	}
@@ -529,6 +546,8 @@ function setNotifDisplay(notif){
 
 //camera page JS
 document.getElementById("cameras-page-close-button").addEventListener("click", function(){
+
+
 	var d = document.createElement("div");
 	d.className = "statusBarContainer";
 	d.id = "status-bar-container";
